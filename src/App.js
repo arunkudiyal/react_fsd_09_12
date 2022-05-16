@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Button from "./Button";
+import Person from './components/Person';
 
 class App extends Component {
   render() {
@@ -9,15 +10,10 @@ class App extends Component {
       <div>
         <div className="container-fluid">
           <h1> Hello...Welcome to React Library! </h1>
-        </div>
+        </div> <hr />
         <div className="container">
           {/* Props are a way to customise the Component */}
-          <Button text="Button - 1" color="primary" props2="" />
-          <Button text="Button - 2" color="danger" />
-          <Button text="Button - 3" color="success" />
-          <Button text="Button - 4" color="muted" />
-          <Button text="Button - 5" color="info" />
-          <Button text="Button - 6" color="warning" />
+          <Person name="Benjamin" age="23" />
           <Button color="success" />
         </div>
       </div>
