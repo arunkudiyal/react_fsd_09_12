@@ -12,7 +12,8 @@ class App extends Component {
       { name: 'John', age: '25' },
       { name: 'Max', age: '28' }
     ],
-    anotherState: 'This is an another state'
+    anotherState: 'This is an another state',
+    anotherStateValue: true
   }
 
   switchNameHandler = () => {
@@ -22,7 +23,8 @@ class App extends Component {
         { name: 'Ben', age: '23' },
         { name: 'Johnatthan', age: '25' },
         { name: 'Maxilliam', age: '28' }
-      ]
+      ],
+      anotherStateValue: false
     })
   }
 
@@ -34,9 +36,15 @@ class App extends Component {
         </div> <hr />
         <div className="container">
           {/* Props are a way to customise the Component */}
-          <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-          <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-          <Person name={this.state.persons[2].name} age={this.state.persons[2].age} >Dummy Text 1</Person>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age} />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age} />
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age} >Dummy Text 1</Person>
           <button onClick={this.switchNameHandler} className='btn btn-danger'>Switch Name</button>
         </div>
       </div>
@@ -46,22 +54,54 @@ class App extends Component {
 export default App;
 
 // function App() {
-// JSX --> JS Syntax Xtension --> Syntactic Sugar -> JS which looks like HTML
-// documnet.createElement('div').setAttribute('class', 'App') | <div className="App"></div>
+//   // useState( JS Object which contains the value of the state )
+//   // HOOKS ARE ONLY AVAILABLE IN REACT VERSION >= v.16.8
+//   const [personState, setPersonState] = useState({
+//     persons: [
+//       { name: 'Benjamin', age: '23' },
+//       { name: 'John', age: '25' },
+//       { name: 'Max', age: '28' }
+//     ]
+//   })
+
+//   const [anotherState, setAnotherState] = useState('This is an another state')
+
+//   const [anotherStateValue, setAnotherStateValue] = useState(true)
+
+//   const [source, setSource] = useState('https://www.google.com')
+
+//   const switchNameHandler = () => {
+//     setPersonState({
+//       persons: [
+//         { name: 'Ben', age: '23' },
+//         { name: 'Johnatthan', age: '25' },
+//         { name: 'Maxilliam', age: '28' }
+//       ]
+//     })
+//   }
+
+//   // JSX --> JS Syntax Xtension --> Syntactic Sugar -> JS which looks like HTML
+//   // documnet.createElement('div').setAttribute('class', 'App') | <div className="App"></div>
 //   // JSX --> JS --> HTML  ---> BABEL is a compiler
 //   return (
 //     <div>
-//       <div className="container-fluid" >
-//         <h1> Hello...Welcome to React Library! </h1>
-//       </div>
-//       <div className="container">
-//          <Button />
-//          <Button />
-//          <Button />
-//          <Button />
-//          <Button />
-//          <Button />
-//          <Button />
+//       <div>
+//         <div className="container-fluid">
+//           <h1> Hello...Welcome to React Library! </h1>
+//         </div> <hr />
+//         <div className="container">
+//           {/* Props are a way to customise the Component */}
+//           <Person
+//             name={personState.persons[0].name}
+//             age={personState.persons[0].age} />
+//           <Person
+//             name={personState.persons[1].name}
+//             age={personState.persons[1].age} />
+//           <Person
+//             name={personState.persons[2].name}
+//             age={personState.persons[2].age} >Dummy Text 1</Person>
+//           <button onClick={switchNameHandler} className='btn btn-danger'>Switch Name</button>
+//         </div>
 //       </div>
 //     </div>
 //   );
