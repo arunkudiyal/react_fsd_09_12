@@ -1,9 +1,12 @@
 function Person(props) {
     // JavaScript
     return (
-        <div className="container">
-            <p className="lead">I am {props.name} and I am {props.age} years old! </p>
-            {/* {props.children} */}
+        <div>
+            <div className="container">
+                <p className="lead">I am {props.name} and I am {props.age} years old! </p>
+                <input onChange={props.changed} className="form-control" type="text" placeholder="Enter the name" />
+            </div>
+            <br />
         </div>
     )
 }

@@ -16,6 +16,16 @@ class App extends Component {
     anotherStateValue: true
   }
 
+  changeNameHandler = (e) => {
+    this.setState({
+      persons: [
+        { name: 'Ben', age: '23' },
+        { name: e.target.value, age: '25' },
+        { name: 'Maxilliam', age: '28' }
+      ]
+    })
+  }
+
   switchNameHandler = () => {
     // DONOT DO THIS - this.state.persons[0].name = 'Ben' --> State will become unpredictable
     this.setState({
@@ -41,7 +51,8 @@ class App extends Component {
             age={this.state.persons[0].age} />
           <Person
             name={this.state.persons[1].name}
-            age={this.state.persons[1].age} />
+            age={this.state.persons[1].age}
+            changed={this.changeNameHandler} />
           <Person
             name={this.state.persons[2].name}
             age={this.state.persons[2].age} >Dummy Text 1</Person>
