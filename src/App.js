@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import Person from './components/Person';
+import Person from './components/Person/Person';
 
 class App extends Component {
   // You can write JS
@@ -13,7 +13,7 @@ class App extends Component {
       { name: 'Max', age: '28' }
     ],
     anotherState: 'This is an another state',
-    anotherStateValue: true
+    showPersons: false
   }
 
   changeNameHandler = (e) => {
@@ -24,6 +24,11 @@ class App extends Component {
         { name: 'Maxilliam', age: '28' }
       ]
     })
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons
+    this.setState({ showPersons: !doesShow })
   }
 
   switchNameHandler = () => {
@@ -40,24 +45,36 @@ class App extends Component {
 
   render() {
     return (
+      // <div> --> document.createElement('div')
       <div>
         <div className="container-fluid">
           <h1> Hello...Welcome to React Library! </h1>
         </div> <hr />
-        <div className="container">
-          {/* Props are a way to customise the Component */}
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            changed={this.changeNameHandler} />
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age} >Dummy Text 1</Person>
-          <button onClick={this.switchNameHandler} className='btn btn-danger'>Switch Name</button>
-        </div>
+
+        <button onClick={this.togglePersonsHandler} className='btn btn-primary'>Toggle Persons</button>
+        <hr />
+
+        {
+          this.state.showPersons === true ?
+            <div>
+              <div className="container">
+                {/* Props are a way to customise the Component */}
+                <Person
+                  name={this.state.persons[0].name}
+                  age={this.state.persons[0].age} />
+                <Person
+                  name={this.state.persons[1].name}
+                  age={this.state.persons[1].age}
+                  changed={this.changeNameHandler} />
+                <Person
+                  name={this.state.persons[2].name}
+                  age={this.state.persons[2].age} >Dummy Text 1</Person>
+                <button onClick={this.switchNameHandler} className='btn btn-danger'>Switch Name</button>
+              </div>
+            </div> :
+            null
+        }
+
       </div>
     )
   }
