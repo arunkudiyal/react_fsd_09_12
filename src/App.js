@@ -10,7 +10,9 @@ class App extends Component {
     persons: [
       { name: 'Benjamin', age: '23' },
       { name: 'John', age: '25' },
-      { name: 'Max', age: '28' }
+      { name: 'Max', age: '28' },
+      { name: 'Steve', age: '35' },
+      { name: 'Mark', age: '30' }
     ],
     anotherState: 'This is an another state',
     showPersons: false
@@ -44,6 +46,27 @@ class App extends Component {
   }
 
   render() {
+    // JavaScript --> Which will be in immediate use for the return() method
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <div className="container">
+            {/* Props are a way to customise the Component */}
+            <div>
+              {this.state.persons.map((person) => {
+                return <Person
+                  name={person.name}
+                  age={person.age} />
+              })}
+            </div>
+            <button onClick={this.switchNameHandler} className='btn btn-danger'>Switch Name</button>
+          </div>
+        </div>
+      )
+    }
+
     return (
       // <div> --> document.createElement('div')
       <div>
@@ -53,28 +76,7 @@ class App extends Component {
 
         <button onClick={this.togglePersonsHandler} className='btn btn-primary'>Toggle Persons</button>
         <hr />
-
-        {
-          this.state.showPersons === true ?
-            <div>
-              <div className="container">
-                {/* Props are a way to customise the Component */}
-                <Person
-                  name={this.state.persons[0].name}
-                  age={this.state.persons[0].age} />
-                <Person
-                  name={this.state.persons[1].name}
-                  age={this.state.persons[1].age}
-                  changed={this.changeNameHandler} />
-                <Person
-                  name={this.state.persons[2].name}
-                  age={this.state.persons[2].age} >Dummy Text 1</Person>
-                <button onClick={this.switchNameHandler} className='btn btn-danger'>Switch Name</button>
-              </div>
-            </div> :
-            null
-        }
-
+        {persons}
       </div>
     )
   }
