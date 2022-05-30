@@ -8,24 +8,29 @@ class App extends Component {
   // States are IMMUTABLE - cannot be changed directly
   state = {
     persons: [
-      { name: 'Benjamin', age: '23' },
-      { name: 'John', age: '25' },
-      { name: 'Max', age: '28' },
-      { name: 'Steve', age: '35' },
-      { name: 'Mark', age: '30' }
+      { id: 'person-one', name: 'Benjamin', age: '23' },
+      { id: 'person-two', name: 'John', age: '25' },
+      { id: 'person-three', name: 'Max', age: '28' },
+      { id: 'person-four', name: 'Steve', age: '35' },
+      { id: 'person-five', name: 'Mark', age: '30' }
     ],
     anotherState: 'This is an another state',
     showPersons: false
   }
 
-  changeNameHandler = (e) => {
-    this.setState({
-      persons: [
-        { name: 'Ben', age: '23' },
-        { name: e.target.value, age: '25' },
-        { name: 'Maxilliam', age: '28' }
-      ]
-    })
+  changeNameHandler = (event, personId) => {
+    // Find the index of the person based on the ID of the person
+    const index = this.state.persons.findIndex(p => p.id === personId)
+    // Fetching the object value of the person based on the index
+    const person = { ...this.state.persons[index] }
+    // Cahnging the name property to the value coming from the input box
+    person.name = event.target.value
+    // Fetching the value of the persons state and creating a physical array
+    const newPersons = [...this.state.persons]
+    // Changing the person value in the array copy
+    newPersons[index] = person
+    // Setting the actual state of the application
+    this.setState({ persons: newPersons })
   }
 
   togglePersonsHandler = () => {
@@ -37,12 +42,18 @@ class App extends Component {
     // DONOT DO THIS - this.state.persons[0].name = 'Ben' --> State will become unpredictable
     this.setState({
       persons: [
-        { name: 'Ben', age: '23' },
-        { name: 'Johnatthan', age: '25' },
-        { name: 'Maxilliam', age: '28' }
+        { id: 'person-one', name: 'Ben', age: '23' },
+        { id: 'person-two', name: 'Johnatthan', age: '25' },
+        { id: 'person-three', name: 'Maxilliam', age: '28' }
       ],
       anotherStateValue: false
     })
+  }
+
+  deletePersonHandler = (personIndex) => {
+    const newPersons = [...this.state.persons]
+    newPersons.splice(personIndex, 1)
+    this.setState({ persons: newPersons })
   }
 
   render() {
@@ -55,10 +66,13 @@ class App extends Component {
           <div className="container">
             {/* Props are a way to customise the Component */}
             <div>
-              {this.state.persons.map((person) => {
+              {this.state.persons.map((person, index) => {
                 return <Person
+                  key={person.id}
                   name={person.name}
-                  age={person.age} />
+                  age={person.age}
+                  delete={() => this.deletePersonHandler(index)}
+                  changed={(event) => this.changeNameHandler(event, person.id)} />
               })}
             </div>
             <button onClick={this.switchNameHandler} className='btn btn-danger'>Switch Name</button>
