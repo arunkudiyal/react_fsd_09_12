@@ -1,6 +1,7 @@
 import './Person.css'
 
 function Person(props) {
+    console.log(`[Person.js] rendering...`);
     // JavaScript
     const paraStyles = {
         color: 'red'

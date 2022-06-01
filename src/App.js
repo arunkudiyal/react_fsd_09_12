@@ -6,16 +6,33 @@ class App extends Component {
   // If you want to manage your own data inside the component | STATE
   // State is nothing but a simple JS Object
   // States are IMMUTABLE - cannot be changed directly
-  state = {
-    persons: [
-      { id: 'person-one', name: 'Benjamin', age: '23' },
-      { id: 'person-two', name: 'John', age: '25' },
-      { id: 'person-three', name: 'Max', age: '28' },
-      { id: 'person-four', name: 'Steve', age: '35' },
-      { id: 'person-five', name: 'Mark', age: '30' }
-    ],
-    anotherState: 'This is an another state',
-    showPersons: false
+  constructor(props) {
+    super();
+    console.log(`[App.js] constructor`)
+    this.state = {
+      persons: [
+        { id: 'person-one', name: 'Benjamin', age: '23' },
+        { id: 'person-two', name: 'John', age: '25' },
+        { id: 'person-three', name: 'Max', age: '28' },
+        { id: 'person-four', name: 'Steve', age: '35' },
+        { id: 'person-five', name: 'Mark', age: '30' }
+      ],
+      anotherState: 'This is an another state',
+      showPersons: false
+    }
+  }
+
+  // Lifecycle Methods
+  static getDerivedStateFromProps = (props, state) => {
+    console.log(`[App.js] getDerivedStateFromProps()`);
+    console.log(props)
+    console.log(state)
+    return state
+  }
+
+  componentDidMount = () => {
+    console.log(`[App.js] componentDidMount()`);
+    // Make side-effect / Make API calls
   }
 
   changeNameHandler = (event, personId) => {
@@ -57,6 +74,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(`[App.js] render()`);
     // JavaScript --> Which will be in immediate use for the return() method
     let persons = null;
 
@@ -85,7 +103,7 @@ class App extends Component {
       // <div> --> document.createElement('div')
       <div>
         <div className="container-fluid">
-          <h1> Hello...Welcome to React Library! </h1>
+          <h1> {this.props.appTitle} </h1>
         </div> <hr />
 
         <button onClick={this.togglePersonsHandler} className='btn btn-primary'>Toggle Persons</button>
