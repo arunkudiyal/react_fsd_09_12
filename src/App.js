@@ -89,6 +89,7 @@ class App extends Component {
                   key={person.id}
                   name={person.name}
                   age={person.age}
+                  persons={this.state.persons}
                   delete={() => this.deletePersonHandler(index)}
                   changed={(event) => this.changeNameHandler(event, person.id)} />
               })}
