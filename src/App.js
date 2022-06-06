@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Person from './components/Person/Person';
+import Footer from './components/Footer/Footer';
 
 class App extends Component {
   // You can write JS
@@ -18,15 +19,16 @@ class App extends Component {
         { id: 'person-five', name: 'Mark', age: '30' }
       ],
       anotherState: 'This is an another state',
-      showPersons: false
+      showPersons: false,
+      showFooter: true
     }
   }
 
   // Lifecycle Methods
   static getDerivedStateFromProps = (props, state) => {
     console.log(`[App.js] getDerivedStateFromProps()`);
-    console.log(props)
-    console.log(state)
+    // console.log(props)
+    // console.log(state)
     return state
   }
 
@@ -65,6 +67,11 @@ class App extends Component {
       ],
       anotherStateValue: false
     })
+  }
+
+  removeFooterhandler = () => {
+    const showFooterValue = this.state.showFooter
+    this.setState({ showFooter: !showFooterValue })
   }
 
   deletePersonHandler = (personIndex) => {
@@ -110,6 +117,8 @@ class App extends Component {
         <button onClick={this.togglePersonsHandler} className='btn btn-primary'>Toggle Persons</button>
         <hr />
         {persons}
+
+        <Footer personsList={this.state.persons} showFooter={this.state.showFooter} removeFooter={this.removeFooterhandler} text='&copy; Innomatics Research Labs' />
       </div>
     )
   }

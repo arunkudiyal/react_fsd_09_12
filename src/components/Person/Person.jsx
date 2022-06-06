@@ -4,8 +4,8 @@ import './Person.css'
 class Person extends PureComponent {
     static getDerivedStateFromProps = (props, state) => {
         console.log(`[Person.js] getDeriveredStateFromProps`)
-        console.log(props)
-        console.log(state)
+        // console.log(props)
+        // console.log(state)
         return state
     }
 
@@ -27,6 +27,12 @@ class Person extends PureComponent {
 
     componentDidUpdate = () => {
         console.log(`[Person.js] componentDidUpdate`)
+    }
+
+    // Clean Up Methods
+    componentWillUnmount = () => {
+        // Last minute functionalities which is to be performed when the component is destroyed.
+        console.log(`[Persons.js] componentWillUnmount`)
     }
 
     render() {
