@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Person from './components/Person/Person';
 import Footer from './components/Footer/Footer';
+import Aux from './components/HOC/Aux'
 
 class App extends Component {
   // You can write JS
@@ -109,7 +110,7 @@ class App extends Component {
 
     return (
       // <div> --> document.createElement('div')
-      <div>
+      <Aux>
         <div className="container-fluid">
           <h1> {this.props.appTitle} </h1>
         </div> <hr />
@@ -119,7 +120,7 @@ class App extends Component {
         {persons}
 
         <Footer personsList={this.state.persons} showFooter={this.state.showFooter} removeFooter={this.removeFooterhandler} text='&copy; Innomatics Research Labs' />
-      </div>
+      </Aux>
     )
   }
 }
